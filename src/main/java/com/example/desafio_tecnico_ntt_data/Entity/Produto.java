@@ -1,4 +1,4 @@
-package com.example.desafio_tecnico_ntt_data.model;
+package com.example.desafio_tecnico_ntt_data.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
