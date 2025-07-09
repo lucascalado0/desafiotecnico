@@ -12,7 +12,7 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produto")
-    private long idProduto;
+    private Long idProduto;
 
     @Column(nullable = false, length = 100)
     private String nome;
@@ -27,7 +27,7 @@ public class Produto {
         this.nome = nome;
         this.descricao = descricao;
         if(preco < 0) {
-            throw new IllegalArgumentException("O preço não pode ser negativo.");
+            throw new IllegalArgumentException("O preço do produto não pode ser negativo.");
         } else {
             this.preco = preco;
         }
