@@ -1,12 +1,20 @@
 package com.example.desafio_tecnico_ntt_data.DTO;
 
 import com.example.desafio_tecnico_ntt_data.Entity.Produto;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 public class ProdutoDTO {
 
     private Long idProduto;
+
+    @NotBlank
     private String nome;
+
+    @NotBlank
     private String descricao;
+
+    @Positive(message = "O preço deve ser maior que zero")
     private double preco;
 
     public ProdutoDTO() {
@@ -56,5 +64,9 @@ public class ProdutoDTO {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public Produto toEntity(){
+        return new Produto(this.nome, this.descricao, this.preco);
     }
 }
