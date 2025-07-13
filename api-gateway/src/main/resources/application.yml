@@ -1,0 +1,30 @@
+# Porta que o API Gateway irá escutar (conforme o diagrama: 8700-8799)
+server:
+  port: 8765
+
+# Nome do serviço do Gateway para registro no Eureka
+spring:
+  application:
+    name: GATEWAY-SERVICE
+
+  # Configuração do Spring Cloud Gateway
+  cloud:
+    gateway:
+      routes:
+        # Rota para o Microsserviço de Produtos
+        - id: produto_route       # Um ID único para a rota
+          uri: lb://PRODUTO-SERVICE # 'lb' significa Load Balancer. Redireciona para o serviço com este nome no Eureka.
+          predicates:
+            - Path=/produtos/** # Condição: se a URL começar com /produtos, esta rota é ativada.
+
+        # Rota para o Microsserviço de Pedidos
+        - id: pedido_route
+          uri: lb://PEDIDO-SERVICE
+          predicates:
+            - Path=/pedidos/**
+
+# Endereço do seu Eureka Server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
