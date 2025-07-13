@@ -24,11 +24,9 @@ public class PedidoService {
 
         List<ProdutoDTO> produtosCompletos = request.getItens().stream()
                 .map(itemRequest -> {
-                    // 2. Busca os detalhes do produto usando o client
-                    ProdutoDTO produto = produtoClient.buscarProdutoPorId(itemRequest.getProdutoId());
+=                    ProdutoDTO produto = produtoClient.buscarProdutoPorId(itemRequest.getProdutoId());
 
                     if (produto != null) {
-                        // 3. Adiciona a quantidade ao DTO para uso posterior no cálculo
                         produto.setQuantidade(itemRequest.getQuantidade());
                     }
                     return produto;
@@ -36,12 +34,10 @@ public class PedidoService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-        // 4. Calcula o novo valor total considerando a quantidade
         BigDecimal valorTotal = produtosCompletos.stream()
                 .map(produto -> produto.getPreco().multiply(BigDecimal.valueOf(produto.getQuantidade())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // Retorna a resposta
         return new PedidoResponse("PEDIDO SIMULADO COM SUCESSO", produtosCompletos, valorTotal);
     }
 }
