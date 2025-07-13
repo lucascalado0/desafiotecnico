@@ -24,9 +24,11 @@ public class PedidoService {
 
         List<ProdutoDTO> produtosCompletos = request.getItens().stream()
                 .map(itemRequest -> {
-=                    ProdutoDTO produto = produtoClient.buscarProdutoPorId(itemRequest.getProdutoId());
+                    
+                    ProdutoDTO produto = produtoClient.buscarProdutoPorId(itemRequest.getProdutoId());
 
                     if (produto != null) {
+                        
                         produto.setQuantidade(itemRequest.getQuantidade());
                     }
                     return produto;
@@ -34,10 +36,12 @@ public class PedidoService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
+        
         BigDecimal valorTotal = produtosCompletos.stream()
                 .map(produto -> produto.getPreco().multiply(BigDecimal.valueOf(produto.getQuantidade())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
+        
         return new PedidoResponse("PEDIDO SIMULADO COM SUCESSO", produtosCompletos, valorTotal);
     }
 }
