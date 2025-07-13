@@ -18,7 +18,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    @PostMapping(value = "/cadastrar")
+    @PostMapping
     public ResponseEntity<ProdutoDTO> cadastrarProduto(@Valid @RequestBody ProdutoDTO produtoDTO) {
         Produto produto = produtoService.cadastrarProduto(produtoDTO);
 
