@@ -9,4 +9,7 @@
   <li>Lombok</li>
   <li>Jpa</li>
   <li>Spring web</li>
+  <li>Eureka Server</li>
+  <li>Eureka Client</li>
+  <li>API Gateway</li>
 </ul>
